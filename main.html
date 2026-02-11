@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Advanced Scientific Calculator</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            transition: 0.3s;
+        }
+
+        body.dark {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        body.light {
+            background: #f4f4f4;
+        }
+
+        .calculator {
+            width: 340px;
+            padding: 20px;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        body.dark .calculator {
+            background: #1e1e1e;
+        }
+
+        body.light .calculator {
+            background: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        #display {
+            width: 100%;
+            height: 60px;
+            font-size: 22px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            text-align: right;
+            box-sizing: border-box;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        button {
+            height: 45px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .number { background: #333; color: white; }
+        .operator { background: orange; color: white; }
+        .equal { background: green; color: white; }
+        .clear { background: red; color: white; }
+        .scientific { background: #555; color: white; }
+
+        body.light .number { background: #ddd; color: black; }
+        body.light .scientific { background: #bbb; color: black; }
+
+        .theme-btn {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="dark">
+
+<div class="calculator">
+
+    <button class="theme-btn" onclick="toggleTheme()">Switch Theme</button>
+
+    <input type="text" id="display" readonly>
+
+    <div class="buttons">
+
+        <button class="scientific" onclick="square()">x²</button>
+        <button class="scientific" onclick="cube()">x³</button>
+        <button class="scientific" onclick="inverse()">1/x</button>
+        <button class="scientific" onclick="sqrt()">√</button>
+        <button class="clear" onclick="clearDisplay()">C</button>
+
+        <button class="scientific" onclick="sin()">sin</button>
+        <button class="scientific" onclick="cos()">cos</button>
+        <button class="scientific" onclick="tan()">tan</button>
+        <button class="operator" onclick="appendValue('/')">/</button>
+        <button class="operator" onclick="appendValue('*')">*</button>
+
+        <button class="number" onclick="appendValue('7')">7</button>
+        <button class="number" onclick="appendValue('8')">8</button>
+        <button class="number" onclick="appendValue('9')">9</button>
+        <button class="operator" onclick="appendValue('-')">-</button>
+        <button class="operator" onclick="appendValue('+')">+</button>
+
+        <button class="number" onclick="appendValue('4')">4</button>
+        <button class="number" onclick="appendValue('5')">5</button>
+        <button class="number" onclick="appendValue('6')">6</button>
+        <button class="number" onclick="appendValue('1')">1</button>
+        <button class="number" onclick="appendValue('2')">2</button>
+
+        <button class="number" onclick="appendValue('3')">3</button>
+        <button class="number" onclick="appendValue('0')">0</button>
+        <button class="number" onclick="appendValue('.')">.</button>
+        <button class="equal" onclick="calculate()">=</button>
+
+    </div>
+</div>
+
+<script>
+    function appendValue(value) {
+        document.getElementById("display").value += value;
+    }
+
+    function clearDisplay() {
+        document.getElementById("display").value = "";
+    }
+
+    function calculate() {
+        try {
+            display.value = eval(display.value);
+        } catch {
+            alert("Invalid Input");
+        }
+    }
+
+    function square() {
+        let value = parseFloat(display.value);
+        display.value = value * value;
+    }
+
+    function cube() {
+        let value = parseFloat(display.value);
+        display.value = value * value * value;
+    }
+
+    function inverse() {
+        let value = parseFloat(display.value);
+        display.value = 1 / value;
+    }
+
+    function sqrt() {
+        let value = parseFloat(display.value);
+        display.value = Math.sqrt(value);
+    }
+
+    function sin() {
+        let value = parseFloat(display.value);
+        display.value = Math.sin(value * Math.PI / 180);
+    }
+
+    function cos() {
+        let value = parseFloat(display.value);
+        display.value = Math.cos(value * Math.PI / 180);
+    }
+
+    function tan() {
+        let value = parseFloat(display.value);
+        display.value = Math.tan(value * Math.PI / 180);
+    }
+
+    function toggleTheme() {
+        document.body.classList.toggle("light");
+        document.body.classList.toggle("dark");
+    }
+</script>
+
+</body>
+</html>
